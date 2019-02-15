@@ -1,12 +1,16 @@
 package ea.kolokolov.endpoint;
 
+import ea.kolokolov.data.Account;
 import ea.kolokolov.service.HelloService;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 @Path("account")
+@Produces(MediaType.APPLICATION_JSON)
 public class AccountEndpoint {
 
     private HelloService helloService;
@@ -17,8 +21,8 @@ public class AccountEndpoint {
     }
 
     @GET
-    public String get() {
-        return helloService.sayHello() + " yo, bro!";
+    public Account get() {
+        return new Account("Evgeny", 12L);
     }
 
 }

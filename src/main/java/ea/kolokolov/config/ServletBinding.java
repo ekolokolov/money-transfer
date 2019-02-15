@@ -17,10 +17,12 @@ public class ServletBinding extends ServletModule {
         /* bind the REST resources */
         bind(AccountEndpoint.class);
 
-        /* bind jackson converters for JAXB/JSON serialization */
+
         bind(MessageBodyReader.class).to(JacksonJsonProvider.class);
         bind(MessageBodyWriter.class).to(JacksonJsonProvider.class);
         Map<String, String> initParams = new HashMap<String, String>();
+        initParams.put("com.sun.jersey.config.feature.Trace",
+                "true");
         serve("*").with(
                 GuiceContainer.class,
                 initParams);
