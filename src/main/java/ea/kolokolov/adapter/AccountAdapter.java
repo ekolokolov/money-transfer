@@ -1,16 +1,20 @@
 package ea.kolokolov.adapter;
 
-import ea.kolokolov.data.Account;
-import ea.kolokolov.jooq.tables.records.AccountRecord;
+import ea.kolokolov.model.Account;
+import ea.kolokolov.model.User;
+
+import java.util.List;
+import java.util.Map;
+
 
 public class AccountAdapter {
 
-    public Account createAccount(AccountRecord record) {
-        Account account = new Account();
-        account.setId(record.getId());
-        account.setFamily(record.getFamily());
-        account.setName(record.getName());
-        return account;
+    public User map(Map<User, List<Account>> record) {
+        for (User user : record.keySet()) {
+            List<Account> accounts = record.get(user);
+            user.setAccounts(accounts);
+            return user;
+        }
+        return null;
     }
-
 }

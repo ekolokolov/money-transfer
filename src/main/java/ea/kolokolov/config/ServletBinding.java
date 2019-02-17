@@ -3,6 +3,7 @@ package ea.kolokolov.config;
 import com.google.inject.servlet.ServletModule;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
 import ea.kolokolov.endpoint.AccountEndpoint;
+import ea.kolokolov.endpoint.TransferEndpoint;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
 import javax.ws.rs.ext.MessageBodyReader;
@@ -16,6 +17,7 @@ public class ServletBinding extends ServletModule {
     protected void configureServlets() {
         /* bind the REST resources */
         bind(AccountEndpoint.class);
+        bind(TransferEndpoint.class);
 
         bind(MessageBodyReader.class).to(JacksonJsonProvider.class);
         bind(MessageBodyWriter.class).to(JacksonJsonProvider.class);

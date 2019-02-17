@@ -1,17 +1,19 @@
 package ea.kolokolov.service;
 
 import ea.kolokolov.adapter.AccountAdapter;
-import ea.kolokolov.data.Account;
-import ea.kolokolov.jooq.tables.records.AccountRecord;
+import ea.kolokolov.model.Account;
+import ea.kolokolov.model.User;
 import org.jooq.DSLContext;
-import org.jooq.codegen.GenerationTool;
-import org.jooq.meta.jaxb.Configuration;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.jooq.RecordValueReader;
 
 import javax.inject.Inject;
-import javax.xml.bind.JAXB;
-import java.io.File;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
-import static ea.kolokolov.jooq.Tables.ACCOUNT;
+import static ea.kolokolov.jooq.tables.Account.ACCOUNT;
+import static ea.kolokolov.jooq.tables.UserInfo.USER_INFO;
 
 
 public class AccountDaoImpl implements AccountDao {
@@ -22,23 +24,26 @@ public class AccountDaoImpl implements AccountDao {
     @Inject
     public AccountDaoImpl(DSLContext context) {
         this.context = context;
-//        init();
     }
 
     @Override
-    public Account getAccount(Integer id) {
-        AccountRecord accountRecord = context.selectFrom(ACCOUNT)
-                .where(ACCOUNT.ID.eq(id))
-                .fetchAny();
-        return adapter.createAccount(accountRecord);
+    public User getUserInfo(Integer id) {
+
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().addValueReader(new RecordValueReader());
+
+        Map<User, List<Account>> userListMap = context.select()
+                .from(USER_INFO)
+                .leftJoin(ACCOUNT).on(ACCOUNT.USER_ID.eq(USER_INFO.ID))
+                .where(USER_INFO.ID.eq(id))
+                .fetch().intoGroups(User.class, Account.class);
+        return adapter.map(userListMap);
     }
 
-    private void init() {
-        Configuration configuration = JAXB.unmarshal(new File("jook/jooq.xml"), Configuration.class);
-        try {
-            GenerationTool.generate(configuration);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @Override
+    public String transfer(Integer from, Integer to, BigDecimal count) {
+        context.update(ACCOUNT).set(ACCOUNT.BALANCE, count);
+        return "OK";
     }
+
 }

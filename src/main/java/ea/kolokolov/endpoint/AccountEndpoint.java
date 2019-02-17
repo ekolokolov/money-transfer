@@ -1,6 +1,6 @@
 package ea.kolokolov.endpoint;
 
-import ea.kolokolov.data.Account;
+import ea.kolokolov.model.User;
 import ea.kolokolov.service.HelloService;
 
 import javax.inject.Inject;
@@ -23,7 +23,7 @@ public class AccountEndpoint {
 
     @GET
     @Path("/{id}")
-    public Account get(@PathParam("id") Integer id) {
+    public User get(@PathParam("id") Integer id) {
         return helloService.sayHello(id);
     }
 

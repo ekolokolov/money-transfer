@@ -1,8 +1,8 @@
 package ea.kolokolov.service;
 
-import ea.kolokolov.data.Account;
+import ea.kolokolov.model.User;
 
 public interface HelloService {
 
-    Account sayHello(Integer id);
+    User sayHello(Integer id);
 }

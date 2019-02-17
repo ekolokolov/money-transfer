@@ -1,6 +1,6 @@
 package ea.kolokolov.service;
 
-import ea.kolokolov.data.Account;
+import ea.kolokolov.model.User;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -16,8 +16,8 @@ public class HelloServiceImpl implements HelloService {
     }
 
     @Override
-    public Account sayHello(Integer id) {
-        return accountDao.getAccount(id);
+    public User sayHello(Integer id) {
+        return accountDao.getUserInfo(id);
     }
 
 }
