@@ -4,14 +4,9 @@ import java.io.Serializable;
 
 public class Account implements Serializable {
 
+    private Integer id;
     private String name;
-
-    private Long id;
-
-    public Account(String name, Long id) {
-        this.name = name;
-        this.id = id;
-    }
+    private String family;
 
     public String getName() {
         return name;
@@ -21,11 +16,19 @@ public class Account implements Serializable {
         this.name = name;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getFamily() {
+        return family;
+    }
+
+    public void setFamily(String family) {
+        this.family = family;
     }
 }

@@ -6,6 +6,7 @@ import ea.kolokolov.service.HelloService;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -21,8 +22,9 @@ public class AccountEndpoint {
     }
 
     @GET
-    public Account get() {
-        return new Account("Evgeny", 12L);
+    @Path("/{id}")
+    public Account get(@PathParam("id") Integer id) {
+        return helloService.sayHello(id);
     }
 
 }

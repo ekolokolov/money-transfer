@@ -17,7 +17,6 @@ public class ServletBinding extends ServletModule {
         /* bind the REST resources */
         bind(AccountEndpoint.class);
 
-
         bind(MessageBodyReader.class).to(JacksonJsonProvider.class);
         bind(MessageBodyWriter.class).to(JacksonJsonProvider.class);
         Map<String, String> initParams = new HashMap<String, String>();

@@ -9,12 +9,13 @@ import com.google.inject.servlet.GuiceServletContextListener;
  * whatever Modules we want. In this case, we use an anonymous Module, but other
  * modules are welcome as well.
  */
-public class SampleConfig extends GuiceServletContextListener {
+public class GeneralConfig extends GuiceServletContextListener {
     @Override
     protected Injector getInjector() {
         return Guice.createInjector(
                 new ServletBinding(),
-                new ServiceModule()
+                new ServiceModule(),
+                new DaoModule()
         );
     }
 }

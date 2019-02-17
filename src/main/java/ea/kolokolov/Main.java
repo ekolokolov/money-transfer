@@ -2,7 +2,7 @@ package ea.kolokolov;
 
 import com.google.inject.servlet.GuiceFilter;
 import ea.kolokolov.config.EmptyServlet;
-import ea.kolokolov.config.SampleConfig;
+import ea.kolokolov.config.GeneralConfig;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 
@@ -15,7 +15,7 @@ public class Main {
         Server server = new Server(8080);
         ServletContextHandler root = new ServletContextHandler(server, "/", ServletContextHandler.SESSIONS);
 
-        root.addEventListener(new SampleConfig());
+        root.addEventListener(new GeneralConfig());
         root.addFilter(GuiceFilter.class, "/*", EnumSet.of(DispatcherType.REQUEST));
         root.addServlet(EmptyServlet.class, "/*");
 

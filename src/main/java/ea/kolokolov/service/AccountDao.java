@@ -2,7 +2,7 @@ package ea.kolokolov.service;
 
 import ea.kolokolov.data.Account;
 
-public interface HelloService {
+public interface AccountDao {
 
-    Account sayHello(Integer id);
+    Account getAccount(Integer id);
 }
