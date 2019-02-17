@@ -13,6 +13,7 @@
         <jersey.version>1.18.1</jersey.version>
         <jackson.version>1.9.6</jackson.version>
         <guice.version>3.0</guice.version>
+        <jooq.version>3.11.9</jooq.version>
     </properties>
 
     <dependencies>
@@ -75,26 +76,19 @@
         <!--DataBase-->
 
         <dependency>
-            <!-- Use org.jooq for the Open Source Edition
-            org.jooq.pro for commercial editions,
-            org.jooq.pro-java-6 for commercial editions with Java 6 support,
-            org.jooq.trial for the free trial edition
-
-            Note: Only the Open Source Edition is hosted on Maven Central.
-            Import the others manually from your distribution -->
             <groupId>org.jooq</groupId>
             <artifactId>jooq</artifactId>
-            <version>3.11.9</version>
+            <version>${jooq.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jooq</groupId>
             <artifactId>jooq-meta</artifactId>
-            <version>3.11.9</version>
+            <version>${jooq.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jooq</groupId>
             <artifactId>jooq-codegen</artifactId>
-            <version>3.11.9</version>
+            <version>${jooq.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -107,13 +101,6 @@
             <version>1.4.190</version>
         </dependency>
 
-        <!--TESTS-->
-        <!--<dependency>-->
-            <!--<groupId>org.testng</groupId>-->
-            <!--<artifactId>testng</artifactId>-->
-            <!--<version>5.11</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
     </dependencies>
 
     <build>
@@ -151,8 +138,8 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -188,10 +175,10 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.g414.j4.minimal.Main</mainClass>
+                            <mainClass>ea.kolokolov.Main</mainClass>
                         </manifest>
                     </archive>
-                    <finalName>minimal</finalName>
+                    <finalName>moneyTransfer</finalName>
                 </configuration>
             </plugin>
         </plugins>

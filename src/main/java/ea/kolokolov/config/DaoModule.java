@@ -23,10 +23,11 @@ public class DaoModule extends AbstractModule {
     @Provides
     public DSLContext getDslContext() throws SQLException {
         if (context == null) {
-            context = DSL.using(DriverManager.getConnection("jdbc:h2:mem:default;" +
-                    "INIT=runscript from '/home/evgeny/test/maneytransfer/src/main/resources/sql/structure.sql'\\;" +
-                    "runscript from '/home/evgeny/test/maneytransfer/src/main/resources/sql/data.sql';" +
-                    "DB_CLOSE_ON_EXIT=FALSE"), SQLDialect.H2);
+            context = DSL.using(DriverManager.getConnection(
+                    "jdbc:h2:mem:default;" +
+                            "INIT=RUNSCRIPT FROM 'classpath:sql/structure.sql'\\;" +
+                            "RUNSCRIPT FROM 'classpath:sql/data.sql';" +
+                            "DB_CLOSE_ON_EXIT=FALSE"), SQLDialect.H2);
         }
         return context;
     }

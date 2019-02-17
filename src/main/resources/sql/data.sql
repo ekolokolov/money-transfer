@@ -2,4 +2,5 @@ INSERT INTO ACCOUNT (name, family)
 VALUES ('Evgeny', 'kolokolov'),
        ('Galina', 'kolokolova'),
        ('Sergey', 'plokhikh'),
-       ('Mikhail', 'kolokolov');
+       ('Mikhail', 'kolokolov'),
+       ('Иван', 'Иванов');
