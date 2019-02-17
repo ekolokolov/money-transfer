@@ -42,7 +42,7 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public String transfer(Integer from, Integer to, BigDecimal count) {
-        context.update(ACCOUNT).set(ACCOUNT.BALANCE, count);
+        context.update(ACCOUNT).set(ACCOUNT.BALANCE, count).where(ACCOUNT.USER_ID.eq(to)).execute();
         return "OK";
     }
 

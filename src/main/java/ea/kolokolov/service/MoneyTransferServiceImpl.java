@@ -14,6 +14,6 @@ public class MoneyTransferServiceImpl implements MoneyTransferService {
 
     @Override
     public String transfer(Integer from, Integer to, BigDecimal count) {
-        return "OK";
+        return accountDao.transfer(from, to, count);
     }
 }

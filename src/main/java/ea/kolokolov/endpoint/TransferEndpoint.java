@@ -26,7 +26,6 @@ public class TransferEndpoint {
     public String transfer(@PathParam("from") Integer fromId,
                            @PathParam("to") Integer toId,
                            @PathParam("count") BigDecimal count) {
-
         return transferService.transfer(fromId, toId, count);
     }
 
