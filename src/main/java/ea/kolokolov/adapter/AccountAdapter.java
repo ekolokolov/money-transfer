@@ -1,20 +1,20 @@
 package ea.kolokolov.adapter;
 
 import ea.kolokolov.model.Account;
-import ea.kolokolov.model.User;
+import org.jooq.Record;
+import org.jooq.RecordMapper;
 
-import java.util.List;
-import java.util.Map;
+import static ea.kolokolov.jooq.tables.Account.ACCOUNT;
 
+public class AccountAdapter implements RecordMapper<Record, Account> {
 
-public class AccountAdapter {
-
-    public User map(Map<User, List<Account>> record) {
-        for (User user : record.keySet()) {
-            List<Account> accounts = record.get(user);
-            user.setAccounts(accounts);
-            return user;
-        }
-        return null;
+    @Override
+    public Account map(Record record) {
+        Account account = new Account();
+        account.setId(record.get(ACCOUNT.ID));
+        account.setUserId(record.get(ACCOUNT.USER_ID));
+        account.setAccountId(record.get(ACCOUNT.ACCOUNT_NUMBER));
+        account.setBalance(record.get(ACCOUNT.BALANCE));
+        return account;
     }
 }

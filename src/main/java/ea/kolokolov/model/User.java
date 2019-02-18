@@ -1,17 +1,38 @@
 package ea.kolokolov.model;
 
+
+import com.owlike.genson.annotation.JsonIgnore;
+
 import java.util.List;
 
 public class User {
 
-    Integer id;
+    private Integer id;
 
-    String name;
+    private String name;
 
-    String secondName;
+    private String secondName;
 
+    private String login;
 
     private List<Account> accounts;
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    @JsonIgnore
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public List<Account> getAccounts() {
         return accounts;

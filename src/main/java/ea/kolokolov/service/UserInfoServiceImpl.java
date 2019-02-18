@@ -6,18 +6,18 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public class HelloServiceImpl implements HelloService {
+public class UserInfoServiceImpl implements UserInfoService {
 
     private AccountDao accountDao;
 
     @Inject
-    public HelloServiceImpl(AccountDao accountDao) {
+    public UserInfoServiceImpl(AccountDao accountDao) {
         this.accountDao = accountDao;
     }
 
     @Override
-    public User sayHello(Integer id) {
-        return accountDao.getUserInfo(id);
+    public User getUserFullInfo(String login) {
+        return accountDao.getUserInfo(login);
     }
 
 }

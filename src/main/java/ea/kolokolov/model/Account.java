@@ -1,5 +1,7 @@
 package ea.kolokolov.model;
 
+import com.owlike.genson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 
 public class Account {
@@ -12,7 +14,7 @@ public class Account {
 
     private BigDecimal balance;
 
-
+    @JsonIgnore
     public Integer getId() {
         return id;
     }
@@ -29,6 +31,7 @@ public class Account {
         this.accountId = accountId;
     }
 
+    @JsonIgnore
     public Integer getUserId() {
         return userId;
     }

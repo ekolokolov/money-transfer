@@ -3,15 +3,13 @@ package ea.kolokolov.endpoint;
 import ea.kolokolov.service.MoneyTransferService;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.math.BigDecimal;
 
-@Path("account/transfer")
+@Path("transfer")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class TransferEndpoint {
 
     private MoneyTransferService transferService;

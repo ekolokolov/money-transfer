@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public interface AccountDao {
 
-    User getUserInfo(Integer id);
+    User getUserInfo(String id);
 
     String transfer(Integer from, Integer to, BigDecimal count);
 }
