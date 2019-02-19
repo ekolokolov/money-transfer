@@ -23,10 +23,11 @@ ALTER TABLE PUBLIC.ACCOUNT
 create table if not exists PUBLIC.TRANSACTIONS
 (
   id              int auto_increment,
-  transaction_id  int,
+  transaction_id  uuid default random_uuid(),
   account_from_id int,
   account_to_id   int,
-  amount          DECIMAL(100, 2)
+  amount          DECIMAL(100, 2),
+  status          varchar2(10)
 );
 
 

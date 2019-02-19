@@ -1,6 +1,7 @@
 package ea.kolokolov.model;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class Transaction {
 
@@ -11,7 +12,8 @@ public class Transaction {
     private BigDecimal count;
 
     private TransactionStatus status;
-    private String transactionNumber;
+
+    private UUID transactionNumber;
 
     public Integer getFrom() {
         return from;
@@ -45,11 +47,11 @@ public class Transaction {
         this.status = status;
     }
 
-    public void setTransactionNumber(String transactionNumber) {
+    public void setTransactionNumber(UUID transactionNumber) {
         this.transactionNumber = transactionNumber;
     }
 
-    public String getTransactionNumber() {
+    public UUID getTransactionNumber() {
         return transactionNumber;
     }
 }

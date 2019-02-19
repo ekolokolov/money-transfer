@@ -6,7 +6,11 @@ import ea.kolokolov.service.TransactionService;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.UUID;
+
+import static javax.ws.rs.core.Response.ok;
 
 @Path("users/{login}/accounts/{accountId}/transactions")
 @Produces(MediaType.APPLICATION_JSON)
@@ -28,6 +32,13 @@ public class TransactionEndpoint {
     @GET
     public List<Transaction> getTransactions(@PathParam("accountId") Integer accountId) {
         return transactionService.getAllTransactions(accountId);
+    }
+
+    @GET
+    @Path("{transactionId}")
+    public Response getTransaction(@PathParam("transactionId") UUID uuid) {
+        Transaction transaction = transactionService.getTransaction(uuid);
+        return ok(transaction).build();
     }
 
 }

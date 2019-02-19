@@ -6,6 +6,7 @@ import ea.kolokolov.model.Transaction;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.List;
+import java.util.UUID;
 
 @Singleton
 public class TransactionServiceImpl implements TransactionService {
@@ -23,7 +24,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction getTransactionById(Integer userId, Integer transactionId) {
+    public Transaction getTransaction(UUID transactionId) {
         return null;
     }
 

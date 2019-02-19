@@ -25,6 +25,7 @@ public class DaoModule extends AbstractModule {
         bind(UserDao.class).to(UserDaoImpl.class);
         bind(AccountDao.class).to(AccountDaoImpl.class);
         bind(TransactionDao.class).to(TransactionDaoImpl.class);
+        initDb();
     }
 
     @Provides
@@ -41,9 +42,19 @@ public class DaoModule extends AbstractModule {
         return DriverManager.getConnection(
                 new StringJoiner(";")
                         .add("jdbc:h2:mem:default")
-                        .add("INIT=RUNSCRIPT FROM 'classpath:sql/structure.sql'\\")
-                        .add("RUNSCRIPT FROM 'classpath:sql/data.sql'")
                         .add("DB_CLOSE_ON_EXIT=FALSE").toString());
+    }
+
+    private void initDb() {
+        try {
+            DriverManager.getConnection(
+                    new StringJoiner(";")
+                            .add("jdbc:h2:mem:default")
+                            .add("INIT=RUNSCRIPT FROM 'classpath:sql/structure.sql'\\")
+                            .add("RUNSCRIPT FROM 'classpath:sql/data.sql'").toString());
+        } catch (SQLException e) {
+            System.exit(1);
+        }
     }
 
     private void init() {
