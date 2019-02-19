@@ -1,0 +1,596 @@
+GET http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+<> 2019-02-19T085805.200.json
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 873468973,
+  "count": 15.10
+}
+
+<> 2019-02-19T085721-1.200.json
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 873468973,
+  "count": 15.10
+}
+
+<> 2019-02-19T085721.200.json
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 873468973,
+  "count": 15.10
+}
+
+<> 2019-02-19T085621.200.json
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 873468973,
+  "count": 15.10
+}
+
+<> 2019-02-19T085507.200.json
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 873468973,
+  "count": 15.10
+}
+
+<> 2019-02-19T084954.200.json
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 873468973,
+  "count": 15.10
+}
+
+<> 2019-02-19T084953.200.json
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 873468973,
+  "count": 15.10
+}
+
+<> 2019-02-19T084918.200.json
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 873468973,
+  "count": 15.10
+}
+
+<> 2019-02-19T084438.200.json
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 873468973,
+  "count": 15.10
+}
+
+<> 2019-02-19T084412.200.json
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 873468973,
+  "count": 15.10
+}
+
+<> 2019-02-19T084220.200.json
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 873468973,
+  "count": 15.10
+}
+
+<> 2019-02-19T084207.200.json
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 873468973,
+  "count": 15.10
+}
+
+<> 2019-02-19T084116.200.json
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 873468973,
+  "count": 15.10
+}
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 873468973,
+  "count": 15.10
+}
+
+<> 2019-02-19T083948.200.json
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 778999007,
+  "count": 778999007
+}
+
+<> 2019-02-19T083921.200.json
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 778999007,
+  "count": 778999007
+}
+
+<> 2019-02-19T083859.200.json
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 778999007,
+  "count": 778999007
+}
+
+<> 2019-02-19T083852.200.json
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 778999007,
+  "count": 778999007
+}
+
+<> 2019-02-19T083214.500.html
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 778999007,
+  "count": 778999007
+}
+
+<> 2019-02-19T083052.500.html
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 778999007,
+  "count": 12.20
+}
+
+<> 2019-02-19T083039.500.html
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 990066778,
+  "to": 990066778,
+  "count": 12.20
+}
+
+<> 2019-02-19T083017.500.html
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 990066778,
+  "count": 12.20
+}
+
+<> 2019-02-19T082950.500.html
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 11,
+  "count": 12.20
+}
+
+<> 2019-02-19T082354.500.html
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 11,
+  "count": 12.20
+}
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 11,
+  "count": 12.20
+}
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 11,
+  "count": 12.20
+}
+
+###
+
+POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+{
+  "from": 778999007,
+  "to": 11,
+  "count": 12.20
+}
+
+###
+
+GET http://localhost:8080/users/gkolokolova
+Accept: */*
+Content-Type: application/json
+
+<> 2019-02-19T073532.200.json
+
+###
+
+GET http://localhost:8080/users/gkolokolova
+Accept: */*
+Content-Type: application/json
+
+<> 2019-02-19T072201.200.json
+
+###
+
+GET http://localhost:8080/user/gkolokolova
+Accept: */*
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/user/gkolokolova
+Accept: */*
+Content-Type: application/json
+
+<> 2019-02-18T060558.500.html
+
+###
+
+GET http://localhost:8080/user/gkolokolova
+Accept: */*
+Content-Type: application/json
+
+<> 2019-02-18T060527.500.html
+
+###
+
+GET http://localhost:8080/user/gkolokolova
+Accept: */*
+Content-Type: application/json
+
+<> 2019-02-18T060255.500.html
+
+###
+
+GET http://localhost:8080/user/ekolokolov
+Accept: */*
+Content-Type: application/json
+
+<> 2019-02-18T060202.500.html
+
+###
+
+POST http://localhost:8080/transfer
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "from": 13,
+  "to": 11,
+  "count": 12.20
+}
+
+<> 2019-02-18T055307.200.json
+
+###
+
+POST http://localhost:8080/transfer
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "from": 13,
+  "to": 11,
+  "count": 12.20
+}
+
+###
+
+POST http://localhost:8080/transfer
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{ "from" : 13,
+  "to" : 11,
+  "count" : 12.20
+}
+
+###
+
+POST http://localhost:8080/transfer
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{ "from" : 13,
+  "to" : 11,
+  "count" : 12.20
+}
+
+<> 2019-02-18T054801.200.json
+
+###
+
+POST http://localhost:8080/transfer
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{ "from" : 13,
+  "to" : 11,
+  "count" : 12.20
+}
+
+###
+
+POST http://localhost:8080/transfer
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{ "from" : 13,
+  "to" : 11,
+  "count" : 12.20
+}
+
+###
+
+POST http://localhost:8080/transfer
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{ "from" : 13,
+  "to" : 11,
+  "count" : 12.20
+}
+
+###
+
+POST http://localhost:8080/transfer
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{ "from" : 13,
+  "to" : 11,
+  "count" : 12.20
+}
+
+<> 2019-02-18T053908.200.json
+
+###
+
+POST http://localhost:8080
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+POST http://localhost:8080/transfer
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{ "from" : 13,
+  "to" : 11,
+  "count" : 12.20
+}
+
+<> 2019-02-18T053830.200.json
+
+###
+
+POST http://localhost:8080/transfer
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{ "from" : 13,
+  "to" : 11,
+  "count" : 12.20
+}
+
+<> 2019-02-18T053813.200.json
+
+###
+
+POST http://localhost:8080/transfer
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{ "from" : 13,
+  "to" : 11,
+  "count" : 12.20
+}
+
+<> 2019-02-18T053749.200.json
+
+###
+
+POST http://localhost:8080/transfer
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{ "from" : 12,
+  "to" : 11,
+  "count" : 12.20
+}
+
+<> 2019-02-18T053741.403.txt
+
+###
+

@@ -14,6 +14,26 @@ create table if not exists PUBLIC.ACCOUNT
   balance        DECIMAL(100, 2),
 );
 
+
 ALTER TABLE PUBLIC.ACCOUNT
   add foreign key (user_id)
     references PUBLIC.USER_INFO (id);
+
+
+create table if not exists PUBLIC.TRANSACTIONS
+(
+  id              int auto_increment,
+  transaction_id  int,
+  account_from_id int,
+  account_to_id   int,
+  amount          DECIMAL(100, 2)
+);
+
+
+-- ALTER TABLE PUBLIC.TRANSACTIONS
+--   add foreign key (account_from_id)
+--     references PUBLIC.ACCOUNT (id);
+--
+-- ALTER TABLE PUBLIC.TRANSACTIONS
+--   add foreign key (account_to_id)
+--     references PUBLIC.ACCOUNT (id);

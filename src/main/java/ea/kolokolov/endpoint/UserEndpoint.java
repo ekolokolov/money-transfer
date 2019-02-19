@@ -1,31 +1,36 @@
 package ea.kolokolov.endpoint;
 
 import ea.kolokolov.exception.UserNotFoundException;
-import ea.kolokolov.model.User;
 import ea.kolokolov.service.UserInfoService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
-@Path("user")
+import static javax.ws.rs.core.Response.ok;
+
+@Path("users")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserEndpoint {
 
-    private UserInfoService helloService;
+    private UserInfoService userInfoService;
 
     @Inject
-    public UserEndpoint(UserInfoService helloService) {
-        this.helloService = helloService;
+    public UserEndpoint(UserInfoService userInfoService) {
+        this.userInfoService = userInfoService;
     }
 
     @GET
     @Path("/{login}")
-    public User get(@PathParam("login") String login) throws UserNotFoundException {
-        User user = helloService.getUserFullInfo(login);
-        if (user == null) throw new UserNotFoundException(login);
-        return user;
+    public Response get(@PathParam("login") String login) throws UserNotFoundException {
+        return ok(userInfoService.getUser(login)).build();
+    }
+
+    @GET
+    public Response getUsers() {
+        return ok(userInfoService.getUsers()).build();
     }
 
 }

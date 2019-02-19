@@ -2,7 +2,11 @@ package ea.kolokolov.service;
 
 import ea.kolokolov.model.User;
 
+import java.util.List;
+
 public interface UserInfoService {
 
-    User getUserFullInfo(String id);
+    List<User> getUsers();
+
+    User getUser(String userId);
 }

@@ -2,8 +2,7 @@ package ea.kolokolov.config;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
-import ea.kolokolov.service.AccountDao;
-import ea.kolokolov.service.UserInfoDaoImpl;
+import ea.kolokolov.dao.*;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.codegen.GenerationTool;
@@ -23,7 +22,9 @@ public class DaoModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(AccountDao.class).to(UserInfoDaoImpl.class);
+        bind(UserDao.class).to(UserDaoImpl.class);
+        bind(AccountDao.class).to(AccountDaoImpl.class);
+        bind(TransactionDao.class).to(TransactionDaoImpl.class);
     }
 
     @Provides

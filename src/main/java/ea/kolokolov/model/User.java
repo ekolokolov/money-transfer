@@ -3,8 +3,6 @@ package ea.kolokolov.model;
 
 import com.owlike.genson.annotation.JsonIgnore;
 
-import java.util.List;
-
 public class User {
 
     private Integer id;
@@ -14,8 +12,6 @@ public class User {
     private String secondName;
 
     private String login;
-
-    private List<Account> accounts;
 
     public String getLogin() {
         return login;
@@ -32,14 +28,6 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public List<Account> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
     }
 
     public String getName() {

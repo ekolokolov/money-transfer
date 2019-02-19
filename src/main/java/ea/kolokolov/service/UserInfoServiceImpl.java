@@ -1,23 +1,30 @@
 package ea.kolokolov.service;
 
+import ea.kolokolov.dao.UserDao;
 import ea.kolokolov.model.User;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.List;
 
 @Singleton
 public class UserInfoServiceImpl implements UserInfoService {
 
-    private AccountDao accountDao;
+    private UserDao userDao;
 
     @Inject
-    public UserInfoServiceImpl(AccountDao accountDao) {
-        this.accountDao = accountDao;
+    public UserInfoServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
     }
 
     @Override
-    public User getUserFullInfo(String login) {
-        return accountDao.getUserInfo(login);
+    public List<User> getUsers() {
+        return userDao.getUsers();
+    }
+
+    @Override
+    public User getUser(String login) {
+        return userDao.getUser(login);
     }
 
 }
