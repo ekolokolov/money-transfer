@@ -3,6 +3,9 @@ package ea.kolokolov.model;
 
 import com.owlike.genson.annotation.JsonIgnore;
 
+/**
+ * User object
+ */
 public class User {
 
     private Integer id;
@@ -11,6 +14,7 @@ public class User {
 
     private String secondName;
 
+    //unique identifier in system
     private String login;
 
     public String getLogin() {

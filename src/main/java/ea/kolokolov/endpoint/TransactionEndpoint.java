@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import static javax.ws.rs.core.Response.ok;
 
+
 @Path("users/{login}/accounts/{accountId}/transactions")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -26,11 +27,11 @@ public class TransactionEndpoint {
 
     @POST
     public Transaction createTransaction(@PathParam("accountId") Integer accountId, Transaction request) {
-        return transactionService.createTransaction(request);
+        return transactionService.transferMoney(request);
     }
 
     @GET
-    public List<Transaction> getTransactions(@PathParam("accountId") Integer accountId) {
+    public List<Transaction> getAllTransactions(@PathParam("accountId") Integer accountId) {
         return transactionService.getAllTransactions(accountId);
     }
 

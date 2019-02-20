@@ -6,6 +6,9 @@ import org.jooq.RecordMapper;
 
 import static ea.kolokolov.jooq.tables.Account.ACCOUNT;
 
+/**
+ * Transform {@link Record} to @{@link Account}
+ */
 public class AccountAdapter implements RecordMapper<Record, Account> {
 
     @Override

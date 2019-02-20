@@ -3,16 +3,25 @@ package ea.kolokolov.model;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+/**
+ * Object business-transaction
+ * used for transfer money between two account
+ */
 public class Transaction {
 
+    //Source account number
     private Integer from;
 
+    //Destination account number
     private Integer to;
 
+    //Amount money for transfer
     private BigDecimal count;
 
+    //Transaction executing result
     private TransactionStatus status;
 
+    //Unique generated value
     private UUID transactionNumber;
 
     public Integer getFrom() {

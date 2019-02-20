@@ -7,6 +7,9 @@ import org.jooq.RecordMapper;
 import static ea.kolokolov.jooq.tables.UserInfo.USER_INFO;
 
 
+/**
+ * Transform {@link Record} to {@link User}
+ */
 public class UserAdapter implements RecordMapper<Record, User> {
 
 

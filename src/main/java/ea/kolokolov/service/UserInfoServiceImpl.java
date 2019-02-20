@@ -27,4 +27,19 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userDao.getUser(login);
     }
 
+    @Override
+    public User createUser(User user) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public User deleteUser(String login) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public User changeUser(User user) {
+        throw new UnsupportedOperationException();
+    }
+
 }

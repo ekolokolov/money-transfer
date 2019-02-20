@@ -25,11 +25,11 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction getTransaction(UUID transactionId) {
-        return null;
+        return transactionDao.getTransaction(transactionId);
     }
 
     @Override
-    public Transaction createTransaction(Transaction transaction) {
-        return transactionDao.createTransaction(transaction);
+    public Transaction transferMoney(Transaction transaction) {
+        return transactionDao.transferMoney(transaction);
     }
 }

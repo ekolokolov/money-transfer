@@ -1,7 +1,7 @@
 create table if not exists PUBLIC.USER_INFO
 (
   id          int auto_increment,
-  login       varchar2(30) not null,
+  login       varchar2(30) not null unique,
   name        varchar2(100),
   second_name varchar2(100),
 );

@@ -1,12 +1,15 @@
 package ea.kolokolov.adapter;
 
 import ea.kolokolov.model.Transaction;
-import ea.kolokolov.model.TransactionStatus;
 import org.jooq.Record;
 import org.jooq.RecordMapper;
 
 import static ea.kolokolov.jooq.tables.Transactions.TRANSACTIONS;
 
+
+/**
+ * Transform {@link Record} to {@link Transaction}
+ */
 public class TransactionAdapter implements RecordMapper<Record, Transaction> {
 
     private StatusConverter statusConverter = new StatusConverter();
@@ -18,7 +21,6 @@ public class TransactionAdapter implements RecordMapper<Record, Transaction> {
         transaction.setTo(record.get(TRANSACTIONS.ACCOUNT_TO_ID));
         transaction.setTransactionNumber(record.get(TRANSACTIONS.TRANSACTION_ID));
         transaction.setStatus(record.get(TRANSACTIONS.STATUS, statusConverter));
-        transaction.setStatus(TransactionStatus.SUCCESS);
         transaction.setCount(record.get(TRANSACTIONS.AMOUNT));
         return transaction;
     }

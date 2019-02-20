@@ -4,14 +4,19 @@ import com.owlike.genson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
 
+/**
+ * Bank Account for user.
+ */
 public class Account {
 
     private Integer id;
 
-    private Integer accountId;
-
     private Integer userId;
 
+    //Business identifier
+    private Integer accountId;
+
+    //Current amount money on account
     private BigDecimal balance;
 
     @JsonIgnore
