@@ -10,7 +10,9 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.UUID;
 
+import static javax.ws.rs.core.Response.Status.FORBIDDEN;
 import static javax.ws.rs.core.Response.ok;
+import static javax.ws.rs.core.Response.status;
 
 
 @Path("users/{login}/accounts/{accountId}/transactions")
@@ -25,11 +27,6 @@ public class TransactionEndpoint {
         this.transactionService = transactionService;
     }
 
-    @POST
-    public Transaction createTransaction(@PathParam("accountId") Integer accountId, Transaction request) {
-        return transactionService.transferMoney(request);
-    }
-
     @GET
     public List<Transaction> getAllTransactions(@PathParam("accountId") Integer accountId) {
         return transactionService.getAllTransactions(accountId);
@@ -42,4 +39,29 @@ public class TransactionEndpoint {
         return ok(transaction).build();
     }
 
+    @POST
+    public Response createTransaction(@PathParam("accountId") Integer accountId, Transaction request) {
+        return ok(transactionService.executeTransaction(request)).build();
+    }
+
+
+    /**
+     * Unsupported operation
+     *
+     * @return Http Status 403 (Forbidden)
+     */
+    @PUT
+    public Response updateTransaction(Transaction transaction) {
+        return status(FORBIDDEN).build();
+    }
+
+    /**
+     * Unsupported operation
+     *
+     * @return Http Status 403 (Forbidden)
+     */
+    @DELETE
+    public Response deleteTransaction() {
+        return status(FORBIDDEN).build();
+    }
 }

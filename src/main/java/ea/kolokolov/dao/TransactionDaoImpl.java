@@ -2,18 +2,15 @@ package ea.kolokolov.dao;
 
 import ea.kolokolov.adapter.TransactionAdapter;
 import ea.kolokolov.model.Transaction;
-import ea.kolokolov.model.TransactionStatus;
 import org.jooq.Configuration;
 import org.jooq.DSLContext;
 import org.jooq.impl.DSL;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
-import static ea.kolokolov.jooq.tables.Account.ACCOUNT;
 import static ea.kolokolov.jooq.tables.Transactions.TRANSACTIONS;
 
 @Singleton
@@ -44,19 +41,8 @@ public class TransactionDaoImpl implements TransactionDao {
     }
 
     @Override
-    public Transaction transferMoney(Transaction transaction) {
-        context.transaction(configuration -> {
-            try {
-                if (!correctDestination(transaction) || !haveEnoughMoney(transaction, configuration)) {
-                    transaction.setStatus(TransactionStatus.FAIL);
-                } else {
-                    transaction.setStatus(TransactionStatus.SUCCESS);
-                }
-                transaction.setTransactionNumber(writeTransaction(transaction, configuration));
-            } catch (RuntimeException e) {
-                throw e;
-            }
-        });
+    public Transaction createTransaction(Transaction transaction, Configuration configuration) throws RuntimeException {
+        transaction.setTransactionNumber(writeTransaction(transaction, configuration));
         return transaction;
     }
 
@@ -83,29 +69,4 @@ public class TransactionDaoImpl implements TransactionDao {
                 .returning(TRANSACTIONS.TRANSACTION_ID).fetchOne().get(TRANSACTIONS.TRANSACTION_ID);
     }
 
-    /**
-     * Compare source and destination account numbers
-     *
-     * @param transaction business-transaction
-     * @return true - if source and destination have different value, else - false.
-     */
-    private boolean correctDestination(Transaction transaction) {
-        return !transaction.getFrom().equals(transaction.getTo());
-    }
-
-    /**
-     * Compare current account balance with current business-transaction amount value
-     *
-     * @param transaction   business-transaction
-     * @param configuration configuration DSL for transaction executing
-     * @return true - if account balance >= amount from business transaction, false - else.
-     */
-    private boolean haveEnoughMoney(Transaction transaction, Configuration configuration) {
-        BigDecimal balance = DSL.using(configuration)
-                .select(ACCOUNT.BALANCE)
-                .from(ACCOUNT)
-                .where(ACCOUNT.ACCOUNT_NUMBER.eq(transaction.getFrom()))
-                .fetchOneInto(BigDecimal.class);
-        return balance.compareTo(transaction.getCount()) >= 0;
-    }
 }

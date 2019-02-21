@@ -6,7 +6,7 @@ import ea.kolokolov.endpoint.AccountEndpoint;
 import ea.kolokolov.endpoint.TransactionEndpoint;
 import ea.kolokolov.endpoint.UserEndpoint;
 import ea.kolokolov.exception.handler.OperationForbiddenHandler;
-import ea.kolokolov.exception.handler.UserNotFoundHandler;
+import ea.kolokolov.exception.handler.SourceNotFoundHandler;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
 import javax.ws.rs.ext.MessageBodyReader;
@@ -22,7 +22,7 @@ public class ServletBinding extends ServletModule {
         bind(UserEndpoint.class);
         bind(TransactionEndpoint.class);
         bind(AccountEndpoint.class);
-        bind(UserNotFoundHandler.class);
+        bind(SourceNotFoundHandler.class);
         bind(OperationForbiddenHandler.class);
 
         bind(MessageBodyReader.class).to(JacksonJsonProvider.class);

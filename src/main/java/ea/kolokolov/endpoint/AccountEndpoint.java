@@ -1,5 +1,6 @@
 package ea.kolokolov.endpoint;
 
+import ea.kolokolov.model.Account;
 import ea.kolokolov.service.AccountService;
 
 import javax.inject.Inject;
@@ -15,7 +16,6 @@ import static javax.ws.rs.core.Response.status;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class AccountEndpoint {
-
 
     private AccountService accountService;
 
@@ -37,23 +37,32 @@ public class AccountEndpoint {
 
 
     /**
-     * Unsupported operations
+     * Unsupported operation
      *
      * @return Http Status 403 (Forbidden)
      */
-
     @POST
-    public Response createAccount() {
+    public Response createAccount(Account account) {
         return status(FORBIDDEN).build();
     }
 
+    /**
+     * Unsupported operation
+     *
+     * @return Http Status 403 (Forbidden)
+     */
     @PUT
-    public Response updateAccount() {
+    public Response updateAccount(Account account) {
         return status(FORBIDDEN).build();
     }
 
+    /**
+     * Unsupported operation
+     *
+     * @return Http Status 403 (Forbidden)
+     */
     @DELETE
-    public Response deleteAccount() {
+    public Response deleteAccount(Account account) {
         return status(FORBIDDEN).build();
     }
 

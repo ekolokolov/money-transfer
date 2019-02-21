@@ -32,5 +32,5 @@ public interface TransactionService {
      * @param transaction business-transaction object
      * @return created transaction
      */
-    Transaction transferMoney(Transaction transaction);
+    Transaction executeTransaction(Transaction transaction);
 }

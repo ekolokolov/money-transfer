@@ -1,6 +1,7 @@
 package ea.kolokolov.dao;
 
 import ea.kolokolov.model.Transaction;
+import org.jooq.Configuration;
 
 import java.util.List;
 import java.util.UUID;
@@ -9,8 +10,6 @@ import java.util.UUID;
  * Data Access layer for Business Money Transactions
  * Allow read/write transactions in DB
  * <p>
- * transferMoney do business logic in DA layer because need do it
- * in one DB transaction.
  */
 public interface TransactionDao {
 
@@ -41,12 +40,15 @@ public interface TransactionDao {
      * Save status @{@link ea.kolokolov.model.TransactionStatus} for transaction
      * if transaction complete successfully save with status "SUCCESS"
      * else save with "FAIL"
+     * executeTransaction do business logic in DA layer because need do it
+     * in one DB transaction.
      *
-     * @param transaction business-transaction
+     * @param transaction   business-transaction
+     * @param configuration DB-configuration for execution on DB-transaction
      * @return new creation transaction;
      * <p>
      * May produce RuntimeException if can't save transaction in DB.
      */
-    Transaction transferMoney(Transaction transaction) throws RuntimeException;
+    Transaction createTransaction(Transaction transaction, Configuration configuration) throws RuntimeException;
 
 }

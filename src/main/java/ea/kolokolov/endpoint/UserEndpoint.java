@@ -1,6 +1,7 @@
 package ea.kolokolov.endpoint;
 
-import ea.kolokolov.exception.UserNotFoundException;
+import ea.kolokolov.exception.SourceNotFoundException;
+import ea.kolokolov.model.User;
 import ea.kolokolov.service.UserInfoService;
 
 import javax.inject.Inject;
@@ -8,7 +9,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import static javax.ws.rs.core.Response.Status.FORBIDDEN;
 import static javax.ws.rs.core.Response.ok;
+import static javax.ws.rs.core.Response.status;
 
 @Path("users")
 @Produces(MediaType.APPLICATION_JSON)
@@ -24,7 +27,7 @@ public class UserEndpoint {
 
     @GET
     @Path("/{login}")
-    public Response get(@PathParam("login") String login) throws UserNotFoundException {
+    public Response get(@PathParam("login") String login) throws SourceNotFoundException {
         return ok(userInfoService.getUser(login)).build();
     }
 
@@ -33,4 +36,33 @@ public class UserEndpoint {
         return ok(userInfoService.getUsers()).build();
     }
 
+    /**
+     * Unsupported operation
+     *
+     * @return Http Status 403 (Forbidden)
+     */
+    @POST
+    public Response createUser(User user) {
+        return status(FORBIDDEN).build();
+    }
+
+    /**
+     * Unsupported operation
+     *
+     * @return Http Status 403 (Forbidden)
+     */
+    @PUT
+    public Response changeUser(User user) {
+        return status(FORBIDDEN).build();
+    }
+
+    /**
+     * Unsupported operation
+     *
+     * @return Http Status 403 (Forbidden)
+     */
+    @DELETE
+    public Response deleteUser(User user) {
+        return status(FORBIDDEN).build();
+    }
 }
