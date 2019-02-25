@@ -2,15 +2,21 @@ POST http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
 Accept: */*
 Content-Type: application/json
 
-{
-  "from": 778999007,
-  "to": 778999001,
-  "count": 9798162.01
-}
+//{
+//  "from": 778999007,
+//  "to": 869866000,
+//  "count": 9798162.01
+//}
 
 ###
 
 GET http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
+Accept: */*
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/users/gkolokolova/accounts/778999007
 Accept: */*
 Content-Type: application/json
 

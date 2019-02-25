@@ -35,7 +35,6 @@ public class AccountEndpoint {
         return ok(accountService.getAccount(accountId)).build();
     }
 
-
     /**
      * Unsupported operation
      *

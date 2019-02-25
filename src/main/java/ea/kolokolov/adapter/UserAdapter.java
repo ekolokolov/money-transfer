@@ -12,12 +12,12 @@ import static ea.kolokolov.jooq.tables.UserInfo.USER_INFO;
  */
 public class UserAdapter implements RecordMapper<Record, User> {
 
-
     @Override
     public User map(Record record) {
         User user = new User();
         user.setId(record.get(USER_INFO.ID));
         user.setName(record.get(USER_INFO.NAME));
+        user.setLogin(record.get(USER_INFO.LOGIN));
         user.setSecondName(record.get(USER_INFO.SECOND_NAME));
         return user;
     }

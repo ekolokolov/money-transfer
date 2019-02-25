@@ -29,8 +29,8 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<Transaction> getAllTransactions(Integer userId) {
-        return transactionDao.getAllTransactions(userId);
+    public List<Transaction> getAllTransactions(Integer accountId) {
+        return transactionDao.getAllTransactions(accountId);
     }
 
     @Override
@@ -55,6 +55,8 @@ public class TransactionServiceImpl implements TransactionService {
 
                 accountDao.updateAccount(sourceAccount, configuration);
                 accountDao.updateAccount(distAccount, configuration);
+            } else {
+                transaction.setStatus(FAIL);
             }
             transactionDao.createTransaction(transaction, configuration);
         });

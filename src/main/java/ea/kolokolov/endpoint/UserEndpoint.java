@@ -1,6 +1,5 @@
 package ea.kolokolov.endpoint;
 
-import ea.kolokolov.exception.SourceNotFoundException;
 import ea.kolokolov.model.User;
 import ea.kolokolov.service.UserInfoService;
 
@@ -27,7 +26,8 @@ public class UserEndpoint {
 
     @GET
     @Path("/{login}")
-    public Response get(@PathParam("login") String login) throws SourceNotFoundException {
+    public Response get(@PathParam("login") String login) {
+//        if (login.isEmpty()) throw new BadRequestException();
         return ok(userInfoService.getUser(login)).build();
     }
 

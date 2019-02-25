@@ -1,7 +1,6 @@
 package ea.kolokolov.service;
 
 import ea.kolokolov.dao.UserDao;
-import ea.kolokolov.exception.SourceNotFoundException;
 import ea.kolokolov.model.User;
 
 import javax.inject.Inject;
@@ -20,11 +19,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public List<User> getUsers() {
-        List<User> users = userDao.getUsers();
-        if (users.isEmpty()) {
-            throw new SourceNotFoundException();
-        }
-        return users;
+        return userDao.getAllUsers();
     }
 
     @Override

@@ -47,7 +47,8 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public Account updateAccount(Account account, Configuration configuration) {
-        return update(account, DSL.using(configuration));
+        update(account, DSL.using(configuration));
+        return getAccount(account.getAccountId(), configuration);
     }
 
     /**
@@ -68,13 +69,11 @@ public class AccountDaoImpl implements AccountDao {
      *
      * @param account Account information
      * @param context DB executing context
-     * @return updated Account
      */
-    private Account update(Account account, DSLContext context) {
+    private void update(Account account, DSLContext context) {
         context.update(ACCOUNT)
                 .set(ACCOUNT.BALANCE, account.getBalance())
                 .where(ACCOUNT.ACCOUNT_NUMBER.eq(account.getAccountId()))
                 .execute();
-        return account;
     }
 }

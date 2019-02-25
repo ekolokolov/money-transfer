@@ -1,5 +1,6 @@
 package ea.kolokolov.dao;
 
+import ea.kolokolov.adapter.UserAdapter;
 import ea.kolokolov.model.User;
 import org.jooq.DSLContext;
 
@@ -22,11 +23,11 @@ public class UserDaoImpl implements UserDao {
     public User getUser(String login) {
         return context.selectFrom(USER_INFO)
                 .where(USER_INFO.LOGIN.eq(login))
-                .fetchOneInto(User.class);
+                .fetchOne(new UserAdapter());
     }
 
     @Override
-    public List<User> getUsers() {
+    public List<User> getAllUsers() {
         return context.selectFrom(USER_INFO)
                 .fetchInto(User.class);
     }
