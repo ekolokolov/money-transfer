@@ -7,8 +7,10 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 import static javax.ws.rs.core.Response.Status.FORBIDDEN;
+import static javax.ws.rs.core.Response.Status.NOT_FOUND;
 import static javax.ws.rs.core.Response.ok;
 import static javax.ws.rs.core.Response.status;
 
@@ -27,13 +29,14 @@ public class UserEndpoint {
     @GET
     @Path("/{login}")
     public Response get(@PathParam("login") String login) {
-//        if (login.isEmpty()) throw new BadRequestException();
-        return ok(userInfoService.getUser(login)).build();
+        User user = userInfoService.getUser(login);
+        return user != null ? ok(user).build() : status(NOT_FOUND).build();
     }
 
     @GET
     public Response getUsers() {
-        return ok(userInfoService.getUsers()).build();
+        List<User> users = userInfoService.getUsers();
+        return !users.isEmpty() ? ok(users).build() : status(NOT_FOUND).build();
     }
 
     /**

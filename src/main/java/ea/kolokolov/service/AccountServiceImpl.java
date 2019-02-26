@@ -19,20 +19,12 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account getAccount(Integer userId) {
-        Account account = accountDao.getAccount(userId);
-        if (account == null) {
-            throw new RuntimeException();
-        }
-        return account;
+        return accountDao.getAccount(userId);
     }
 
     @Override
     public List<Account> getAccounts(String login) {
-        List<Account> accounts = accountDao.getAccounts(login);
-        if (accounts.isEmpty()) {
-            throw new RuntimeException();
-        }
-        return accounts;
+        return accountDao.getAccounts(login);
     }
 
     @Override

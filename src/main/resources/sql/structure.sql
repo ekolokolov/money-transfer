@@ -29,12 +29,3 @@ create table if not exists PUBLIC.TRANSACTIONS
   amount          DECIMAL(100, 2),
   status          varchar2(10)
 );
-
-
--- ALTER TABLE PUBLIC.TRANSACTIONS
---   add foreign key (account_from_id)
---     references PUBLIC.ACCOUNT (id);
---
--- ALTER TABLE PUBLIC.TRANSACTIONS
---   add foreign key (account_to_id)
---     references PUBLIC.ACCOUNT (id);

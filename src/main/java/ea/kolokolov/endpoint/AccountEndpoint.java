@@ -7,8 +7,10 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 import static javax.ws.rs.core.Response.Status.FORBIDDEN;
+import static javax.ws.rs.core.Response.Status.NOT_FOUND;
 import static javax.ws.rs.core.Response.ok;
 import static javax.ws.rs.core.Response.status;
 
@@ -26,13 +28,15 @@ public class AccountEndpoint {
 
     @GET
     public Response getAccounts(@PathParam("login") String login) {
-        return ok(accountService.getAccounts(login)).build();
+        List<Account> accounts = accountService.getAccounts(login);
+        return !accounts.isEmpty() ? ok(accounts).build() : status(NOT_FOUND).build();
     }
 
     @GET
     @Path("{accountId}")
     public Response getAccount(@PathParam("accountId") Integer accountId) {
-        return ok(accountService.getAccount(accountId)).build();
+        Account account = accountService.getAccount(accountId);
+        return account != null ? ok(account).build() : status(NOT_FOUND).build();
     }
 
     /**

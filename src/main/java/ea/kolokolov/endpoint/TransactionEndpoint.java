@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static javax.ws.rs.core.Response.Status.FORBIDDEN;
+import static javax.ws.rs.core.Response.Status.NOT_FOUND;
 import static javax.ws.rs.core.Response.ok;
 import static javax.ws.rs.core.Response.status;
 
@@ -28,20 +29,22 @@ public class TransactionEndpoint {
     }
 
     @GET
-    public List<Transaction> getAllTransactions(@PathParam("accountId") Integer accountId) {
-        return transactionService.getAllTransactions(accountId);
+    public Response getAllTransactions(@PathParam("accountId") Integer accountId) {
+        List<Transaction> allTransactions = transactionService.getAllTransactions(accountId);
+        return !allTransactions.isEmpty() ? ok(allTransactions).build() : status(NOT_FOUND).build();
     }
 
     @GET
     @Path("{transactionId}")
     public Response getTransaction(@PathParam("transactionId") UUID uuid) {
         Transaction transaction = transactionService.getTransaction(uuid);
-        return ok(transaction).build();
+        return transaction != null ? ok(transaction).build() : status(NOT_FOUND).build();
     }
 
     @POST
     public Response createTransaction(@PathParam("accountId") Integer accountId, Transaction request) {
-        return ok(transactionService.executeTransaction(request)).build();
+        Transaction transaction = transactionService.executeTransaction(request);
+        return transaction != null ? ok(transaction).build() : status(NOT_FOUND).build();
     }
 
 

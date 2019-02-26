@@ -71,7 +71,8 @@ public class DaoModule extends AbstractModule {
                             .add("INIT=RUNSCRIPT FROM 'classpath:" + properties.getProperty("db.script.schema") + "'\\")
                             .add("RUNSCRIPT FROM 'classpath:" + properties.getProperty("db.script.data") + "'").toString());
         } catch (SQLException | IOException e) {
-            System.exit(1);
+            e.printStackTrace();
+            System.exit(33);
         }
     }
 
