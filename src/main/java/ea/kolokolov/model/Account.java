@@ -19,6 +19,15 @@ public class Account {
     //Current amount money on account
     private BigDecimal balance;
 
+    public Account() {
+    }
+
+    public Account(Integer userId, Integer accountId, BigDecimal balance) {
+        this.userId = userId;
+        this.accountId = accountId;
+        this.balance = balance;
+    }
+
     @JsonIgnore
     public Integer getId() {
         return id;
@@ -52,4 +61,5 @@ public class Account {
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
+
 }

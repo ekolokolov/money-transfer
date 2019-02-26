@@ -24,6 +24,15 @@ public class Transaction {
     //Unique generated value
     private UUID transactionNumber;
 
+    public Transaction() {
+    }
+
+    public Transaction(Integer from, Integer to, BigDecimal count) {
+        this.from = from;
+        this.to = to;
+        this.count = count;
+    }
+
     public Integer getFrom() {
         return from;
     }

@@ -15,19 +15,30 @@ import org.jooq.tools.jdbc.MockDataProvider;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import static java.math.RoundingMode.HALF_UP;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 
 public class TransactionServiceImplTest {
 
-    private final int FROM = 654124124;
-    private final int TO = 778999007;
-    private final BigDecimal COUNT = new BigDecimal(50.50);
+    private static final BigDecimal SRC_BALANCE = new BigDecimal(3000.12).setScale(2, HALF_UP);
+    private static final BigDecimal DIST_BALANCE = new BigDecimal(2000.00).setScale(2, HALF_UP);
+    private static final BigDecimal UNAVAILABLE_AMOUNT = new BigDecimal(10000000000.10).setScale(2, HALF_UP);
+    private static final BigDecimal AVAILABLE_AMOUNT = new BigDecimal(50.50).setScale(2, HALF_UP);
+    private static final int FROM = 654124124;
+    private static final int TO = 778999007;
     private final UUID TRANSACTION_NUMBER = UUID.randomUUID();
 
     @Mock
@@ -51,80 +62,86 @@ public class TransactionServiceImplTest {
 
     @Test
     public void testGetAllTransactions() {
+        //given
+        List<Transaction> transactions = new ArrayList<>();
+        Transaction expected = new Transaction(FROM, TO, AVAILABLE_AMOUNT);
+        expected.setStatus(TransactionStatus.SUCCESS);
+        expected.setTransactionNumber(TRANSACTION_NUMBER);
+        transactions.add(expected);
+        //when
+        when(transactionDao.getAllTransactions(FROM)).thenReturn(transactions);
         //then
-        service.getAllTransactions(FROM);
+        List<Transaction> allTransactions = service.getAllTransactions(FROM);
+        assertFalse(allTransactions.isEmpty());
+        Transaction actual = allTransactions.get(0);
+        assertEquals(actual, expected);
+        verify(transactionDao).getAllTransactions(FROM);
     }
 
     @Test
     public void testGetTransaction() {
+        //given
+        Transaction expected = new Transaction(FROM, TO, AVAILABLE_AMOUNT);
+        expected.setTransactionNumber(TRANSACTION_NUMBER);
+        expected.setStatus(TransactionStatus.FAIL);
+
+        //when
+        when(transactionDao.getTransaction(TRANSACTION_NUMBER)).thenReturn(expected);
+
         //then
+        Transaction actual = service.getTransaction(TRANSACTION_NUMBER);
+        assertEquals(actual, expected);
+        verify(transactionDao).getTransaction(TRANSACTION_NUMBER);
+
     }
 
-    @Test
-    public void testExecute_SUCCESS_Transaction() {
+    @Test(dataProvider = "transactionsData")
+    public void testExecuteTransaction_withExistingAccounts(Transaction transaction, TransactionStatus status) {
         //given
-        Transaction transaction = createNewTransaction();
-        Account srcAccount = new Account();
+        Account srcAccount = new Account(33, FROM, SRC_BALANCE);
         srcAccount.setId(1);
-        srcAccount.setBalance(new BigDecimal(1000.12));
-        srcAccount.setAccountId(FROM);
-        srcAccount.setUserId(33);
-        Account distAccount = new Account();
+        Account distAccount = new Account(21, TO, DIST_BALANCE);
         distAccount.setId(2);
-        distAccount.setBalance(new BigDecimal(2000.00));
-        distAccount.setAccountId(TO);
-        distAccount.setUserId(33);
-
 
         //when
         Configuration configuration = context.configuration();
-        when(accountDao.getAccount(FROM, configuration)).thenReturn(srcAccount);
-        when(accountDao.getAccount(TO, configuration)).thenReturn(distAccount);
+        when(accountDao.getAccount(eq(FROM), any(Configuration.class))).thenReturn(srcAccount);
+        when(accountDao.getAccount(eq(TO), any(Configuration.class))).thenReturn(distAccount);
+
         when(accountDao.updateAccount(srcAccount, configuration)).thenReturn(distAccount);
         when(accountDao.updateAccount(distAccount, configuration)).thenReturn(distAccount);
+
         when(transactionDao.createTransaction(transaction, configuration))
                 .thenReturn(addTransactionNumber(transaction));
 
         //then
-        Transaction actual = service.executeTransaction(transaction);
-        assertEquals(actual.getCount(), transaction.getCount());
-        assertEquals(actual.getFrom(), transaction.getFrom());
-        assertEquals(actual.getTo(), transaction.getTo());
-        assertEquals(actual.getStatus(), TransactionStatus.SUCCESS);
+        Transaction executeTransaction = service.executeTransaction(transaction);
+        assertEquals(executeTransaction.getCount(), transaction.getCount());
+        assertEquals(executeTransaction.getFrom(), transaction.getFrom());
+        assertEquals(executeTransaction.getTo(), transaction.getTo());
+        assertEquals(executeTransaction.getStatus(), status);
+        assertEquals(executeTransaction.getTransactionNumber(), TRANSACTION_NUMBER);
     }
 
-    @Test
-    public void testExecute_FAIL_Transaction() {
+    @Test(dataProvider = "accountsData")
+    public void testExecuteTransactionWithNotExistingAccounts(Account src, Account dst) {
         //given
-        Transaction transaction = createNewTransaction();
-        Account srcAccount = new Account();
-        srcAccount.setId(1);
-        srcAccount.setBalance(new BigDecimal(1000.12));
-        srcAccount.setAccountId(FROM);
-        srcAccount.setUserId(33);
-        Account distAccount = new Account();
-        distAccount.setId(2);
-        distAccount.setBalance(new BigDecimal(2000.00));
-        distAccount.setAccountId(TO);
-        distAccount.setUserId(33);
-
+        Transaction transaction = new Transaction(FROM, TO, AVAILABLE_AMOUNT);
 
         //when
         Configuration configuration = context.configuration();
-        when(accountDao.getAccount(FROM, configuration)).thenReturn(null);
-        when(accountDao.getAccount(TO, configuration)).thenReturn(null);
-        when(accountDao.updateAccount(srcAccount, configuration)).thenReturn(distAccount);
-        when(accountDao.updateAccount(distAccount, configuration)).thenReturn(distAccount);
+        when(accountDao.getAccount(eq(FROM), any(Configuration.class))).thenReturn(src);
+        when(accountDao.getAccount(eq(TO), any(Configuration.class))).thenReturn(dst);
         when(transactionDao.createTransaction(transaction, configuration))
                 .thenReturn(addTransactionNumber(transaction));
 
         //then
-        Transaction actual = service.executeTransaction(transaction);
-        assertEquals(actual.getCount(), transaction.getCount());
-        assertEquals(actual.getFrom(), transaction.getFrom());
-        assertEquals(actual.getTo(), transaction.getTo());
-        assertEquals(actual.getStatus(), TransactionStatus.FAIL);
-        assertEquals(actual.getTransactionNumber(), TRANSACTION_NUMBER);
+        Transaction executeTransaction = service.executeTransaction(transaction);
+        assertEquals(executeTransaction.getCount(), transaction.getCount());
+        assertEquals(executeTransaction.getFrom(), transaction.getFrom());
+        assertEquals(executeTransaction.getTo(), transaction.getTo());
+        assertEquals(executeTransaction.getStatus(), TransactionStatus.FAIL);
+        assertEquals(executeTransaction.getTransactionNumber(), TRANSACTION_NUMBER);
     }
 
 
@@ -133,11 +150,22 @@ public class TransactionServiceImplTest {
         return transaction;
     }
 
-    private Transaction createNewTransaction() {
-        Transaction newTransaction = new Transaction();
-        newTransaction.setFrom(FROM);
-        newTransaction.setTo(TO);
-        newTransaction.setCount(COUNT);
-        return newTransaction;
+    @DataProvider
+    private Object[][] transactionsData() {
+        return new Object[][]{
+                {new Transaction(FROM, TO, AVAILABLE_AMOUNT), TransactionStatus.SUCCESS},
+                {new Transaction(FROM, FROM, AVAILABLE_AMOUNT), TransactionStatus.FAIL},
+                {new Transaction(FROM, TO, UNAVAILABLE_AMOUNT), TransactionStatus.FAIL},
+        };
     }
+
+    @DataProvider
+    private Object[][] accountsData() {
+        return new Object[][]{
+                {new Account(33, FROM, SRC_BALANCE), null},
+                {null, new Account(21, TO, DIST_BALANCE)},
+                {null, null}
+        };
+    }
+
 }
