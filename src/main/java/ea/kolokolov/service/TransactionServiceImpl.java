@@ -8,6 +8,7 @@ import org.jooq.DSLContext;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,16 +46,17 @@ public class TransactionServiceImpl implements TransactionService {
             Account distAccount = accountDao.getAccount(transaction.getTo(), configuration);
 
             if (sourceAccount != null && distAccount != null) {
-                transaction.setStatus(
-                        transferIsPossible(transaction, sourceAccount, distAccount) ?
-                                SUCCESS : FAIL
-                );
+                if (transferIsPossible(transaction, sourceAccount, distAccount)) {
 
-                sourceAccount.setBalance(sourceAccount.getBalance().subtract(transaction.getCount()));
-                distAccount.setBalance(distAccount.getBalance().add(transaction.getCount()));
+                    sourceAccount.setBalance(sourceAccount.getBalance().subtract(transaction.getCount()));
+                    distAccount.setBalance(distAccount.getBalance().add(transaction.getCount()));
 
-                accountDao.updateAccount(sourceAccount, configuration);
-                accountDao.updateAccount(distAccount, configuration);
+                    accountDao.updateAccount(sourceAccount, configuration);
+                    accountDao.updateAccount(distAccount, configuration);
+                    transaction.setStatus(SUCCESS);
+                } else {
+                    transaction.setStatus(FAIL);
+                }
             } else {
                 transaction.setStatus(FAIL);
             }
@@ -96,7 +98,7 @@ public class TransactionServiceImpl implements TransactionService {
      * @return true - if transaction is correct; else - false;
      */
     private boolean inputDataIsCorrect(Transaction transaction) {
-        return !transaction.getFrom().equals(transaction.getTo());
+        return !transaction.getFrom().equals(transaction.getTo()) && transaction.getCount().compareTo(BigDecimal.ZERO) > 0;
     }
 
 }

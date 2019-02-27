@@ -36,6 +36,7 @@ public class TransactionServiceImplTest {
     private static final BigDecimal SRC_BALANCE = new BigDecimal(3000.12).setScale(2, HALF_UP);
     private static final BigDecimal DIST_BALANCE = new BigDecimal(2000.00).setScale(2, HALF_UP);
     private static final BigDecimal UNAVAILABLE_AMOUNT = new BigDecimal(10000000000.10).setScale(2, HALF_UP);
+    private static final BigDecimal NEGATIVE_AVAILABLE_AMOUNT = new BigDecimal(-1000).setScale(2, HALF_UP);
     private static final BigDecimal AVAILABLE_AMOUNT = new BigDecimal(50.50).setScale(2, HALF_UP);
     private static final int FROM = 654124124;
     private static final int TO = 778999007;
@@ -99,17 +100,12 @@ public class TransactionServiceImplTest {
     public void testExecuteTransaction_withExistingAccounts(Transaction transaction, TransactionStatus status) {
         //given
         Account srcAccount = new Account(33, FROM, SRC_BALANCE);
-        srcAccount.setId(1);
         Account distAccount = new Account(21, TO, DIST_BALANCE);
-        distAccount.setId(2);
 
         //when
         Configuration configuration = context.configuration();
         when(accountDao.getAccount(eq(FROM), any(Configuration.class))).thenReturn(srcAccount);
         when(accountDao.getAccount(eq(TO), any(Configuration.class))).thenReturn(distAccount);
-
-        when(accountDao.updateAccount(srcAccount, configuration)).thenReturn(distAccount);
-        when(accountDao.updateAccount(distAccount, configuration)).thenReturn(distAccount);
 
         when(transactionDao.createTransaction(transaction, configuration))
                 .thenReturn(addTransactionNumber(transaction));
@@ -121,6 +117,12 @@ public class TransactionServiceImplTest {
         assertEquals(executeTransaction.getTo(), transaction.getTo());
         assertEquals(executeTransaction.getStatus(), status);
         assertEquals(executeTransaction.getTransactionNumber(), TRANSACTION_NUMBER);
+        if (transaction.getStatus().equals(TransactionStatus.SUCCESS)) {
+            verify(accountDao).updateAccount(eq(srcAccount), any(Configuration.class));
+            verify(accountDao).updateAccount(eq(distAccount), any(Configuration.class));
+            assertEquals(srcAccount.getBalance(), SRC_BALANCE.subtract(transaction.getCount()));
+            assertEquals(distAccount.getBalance(), DIST_BALANCE.add(transaction.getCount()));
+        }
     }
 
     @Test(dataProvider = "accountsData")
@@ -154,6 +156,7 @@ public class TransactionServiceImplTest {
     private Object[][] transactionsData() {
         return new Object[][]{
                 {new Transaction(FROM, TO, AVAILABLE_AMOUNT), TransactionStatus.SUCCESS},
+                {new Transaction(FROM, TO, NEGATIVE_AVAILABLE_AMOUNT), TransactionStatus.FAIL},
                 {new Transaction(FROM, FROM, AVAILABLE_AMOUNT), TransactionStatus.FAIL},
                 {new Transaction(FROM, TO, UNAVAILABLE_AMOUNT), TransactionStatus.FAIL},
         };

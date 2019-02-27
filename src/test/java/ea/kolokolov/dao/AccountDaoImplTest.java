@@ -70,8 +70,8 @@ public class AccountDaoImplTest {
     public void testUpdateAccount() {
         //given
         BigDecimal newBalance = new BigDecimal(1000).setScale(2, BigDecimal.ROUND_HALF_UP);
-        BigDecimal expectedBalance = new BigDecimal(12765.32).setScale(2, BigDecimal.ROUND_HALF_UP);
-        Integer accountId = 654124124;
+        BigDecimal expectedBalance = new BigDecimal(2000.10).setScale(2, BigDecimal.ROUND_HALF_UP);
+        Integer accountId = 120000003;
 
         Account account = accountDao.getAccount(accountId);
 
@@ -93,7 +93,8 @@ public class AccountDaoImplTest {
         return new Object[][]{
                 {"iivanov", 1},
                 {"petro88", 3},
-                {"google", 0},
+                {"google", 1},
+                {"vano23", 0},
                 {"Iivanov", 0},
                 {"petro", 0},
                 {" ", 0},
