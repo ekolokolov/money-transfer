@@ -1,3 +1,6 @@
+ALTER TABLE PUBLIC.TRANSACTIONS
+  ALTER COLUMN transaction_id set default random_uuid();
+
 INSERT INTO PUBLIC.USER_INFO (login, name, second_name)
 VALUES ('iivanov', 'Ivan', 'Ivanov'),
        ('petro88', 'Petr', 'Petrov'),
