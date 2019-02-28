@@ -10,8 +10,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.UUID;
 
-import static javax.ws.rs.core.Response.Status.FORBIDDEN;
-import static javax.ws.rs.core.Response.Status.NOT_FOUND;
+import static javax.ws.rs.core.Response.Status.*;
 import static javax.ws.rs.core.Response.ok;
 import static javax.ws.rs.core.Response.status;
 
@@ -43,6 +42,9 @@ public class TransactionEndpoint {
 
     @POST
     public Response createTransaction(@PathParam("accountId") Integer accountId, Transaction request) {
+        if (request == null) {
+            return status(BAD_REQUEST).build();
+        }
         Transaction transaction = transactionService.executeTransaction(request);
         return transaction != null ? ok(transaction).build() : status(NOT_FOUND).build();
     }
