@@ -10,13 +10,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/users/gkolokolova/accounts/778999007/transactions
-Accept: */*
-Content-Type: application/json
-
-###
-
-GET http://localhost:8080/users/gkolokolova/accounts/778999007
+GET http://localhost:8080/users/iivanov/accounts/654124124/transactions
 Accept: */*
 Content-Type: application/json
 
