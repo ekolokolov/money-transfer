@@ -22,7 +22,7 @@ public class DBConfig {
         if (connection == null) {
             connection = DriverManager.getConnection(
                     new StringJoiner(";")
-                            .add("jdbc:h2:mem:default")
+                            .add("jdbc:h2:mem:unit")
                             .add("DB_CLOSE_ON_EXIT=FALSE")
                             .add("INIT=RUNSCRIPT FROM 'classpath:sql/structure.sql'\\")
                             .add("RUNSCRIPT FROM 'classpath:sql/data.sql'").toString());
